@@ -63,7 +63,9 @@ function App() {
   return (
     <div className="App">
       {loading ? (
-        <></>
+        <>
+          <Navbar />
+        </>
       ) : (
         <>
           <Navbar />
