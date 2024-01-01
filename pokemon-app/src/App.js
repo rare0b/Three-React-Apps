@@ -12,7 +12,18 @@ function App() {
   const [nextURL, setNextURL] = useState("");
 
   useEffect(() => {
-    fetchPokemonData(initialURL);
+    const initialFetchPokemonData = async () => {
+      //全てのポケモンデータを取得
+      let res = await getAllPokemon(initialURL);
+      //各ポケモンの詳細なデータを取得
+      loadPokemon(res.results);
+
+      setPrevURL(res.previous ?? "");
+      setNextURL(res.next ?? "");
+
+      setLoading(false);
+    };
+    initialFetchPokemonData();
   }, []);
 
   const fetchPokemonData = async (url) => {
