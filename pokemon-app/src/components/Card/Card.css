@@ -1,0 +1,31 @@
+.card {
+  width: 300px;
+  height: 350px;
+  box-shadow: 10px 10px 20px -5px #777777;
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 20px;
+}
+
+.cardName {
+  padding: 0;
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.cardInfo {
+  text-align: center;
+}
+
+.typeName {
+  font-size: 18px;
+}
+
+.cardTypes {
+  height: 50px;
+}
+
+.cardImg {
+  margin-top: 10px;
+}
