@@ -29,6 +29,8 @@ function App() {
   const fetchPokemonData = async (url) => {
     setLoading(true);
 
+    window.scrollTo(0, 0);
+
     //全てのポケモンデータを取得
     let res = await getAllPokemon(url);
     //各ポケモンの詳細なデータを取得
@@ -61,7 +63,7 @@ function App() {
   return (
     <div className="App">
       {loading ? (
-        <h1>Loading...</h1>
+        <></>
       ) : (
         <>
           <Navbar />
