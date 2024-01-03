@@ -1,0 +1,22 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  gap: 45px;
+  background-color: maroon;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s;
+}
+
+nav a:hover {
+  color: dodgerblue;
+}
+
+nav a svg {
+  margin-right: 5px;
+}
