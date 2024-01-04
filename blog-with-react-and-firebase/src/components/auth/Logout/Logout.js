@@ -1,9 +1,9 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth } from "../../../firebase";
 import "./Logout.css";
-import "./authContainer.css";
+import "../authContainer.css";
 
 const Logout = ({ isAuth }) => {
   const logout = () => {

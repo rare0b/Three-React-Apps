@@ -1,9 +1,9 @@
-import { auth, provider } from "../firebase";
+import { auth, provider } from "../../../firebase";
 import { signInWithRedirect } from "firebase/auth";
 import GoogleLoginButton from "./GoogleLoginButton/GoogleLoginButton";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import "./authContainer.css";
+import "../authContainer.css";
 
 const Login = ({ isAuth }) => {
   const loginWithGoogle = () => {
