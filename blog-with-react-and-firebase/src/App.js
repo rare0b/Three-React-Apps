@@ -5,24 +5,40 @@ import CreatePost from "./components/CreatePost";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Navbar from "./components/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./firebase";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  const [user, loading] = useAuthState(auth);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("isAuth", true);
+      setIsAuth(true);
+    } else {
+      localStorage.clear();
+      setIsAuth(false);
+    }
+  }, [user, setIsAuth]);
 
   return (
-    <Router>
-      <Navbar isAuth={isAuth} />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/createpost" element={<CreatePost />}></Route>
-        <Route path="/login" element={<Login setIsAuth={setIsAuth} />}></Route>
-        <Route
-          path="/logout"
-          element={<Logout setIsAuth={setIsAuth} />}
-        ></Route>
-      </Routes>
-    </Router>
+    <div className="App">
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <Router>
+          <Navbar isAuth={isAuth} />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/createpost" element={<CreatePost />}></Route>
+            <Route path="/login" element={<Login isAuth={isAuth} />}></Route>
+            <Route path="/logout" element={<Logout isAuth={isAuth} />}></Route>
+          </Routes>
+        </Router>
+      )}
+    </div>
   );
 }
 
