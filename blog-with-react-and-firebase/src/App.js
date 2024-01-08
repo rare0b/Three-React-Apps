@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import CreatePost from "./components/CreatePost/CreatePost";
 import Login from "./components/auth/Login/Login";
 import Logout from "./components/auth/Logout/Logout";
@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
       {loading ? (
-        <p>Loading...</p>
+        <p className="loadingText">Loading...</p>
       ) : (
         <Router>
           <Navbar isAuth={isAuth} />
