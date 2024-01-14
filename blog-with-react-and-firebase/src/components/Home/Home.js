@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { auth, db } from "../../firebase";
 
 const Home = () => {
@@ -8,7 +15,9 @@ const Home = () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      const data = await getDocs(collection(db, "posts"));
+      // postsを降順取得
+      const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
+      const data = await getDocs(q);
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPosts();
@@ -28,8 +37,8 @@ const Home = () => {
               <h1>{post.title}</h1>
             </div>
             <div className="postTextContainer">{post.postText}</div>
-            <div className="nameAndDeleteButton">
-              <h3>{post.author.username}</h3>
+            <div className="iconAndDeleteButton">
+              <img src={post.author.photoUrl} alt="Author icon" />
               {post.author.id === auth.currentUser?.uid && (
                 <button onClick={() => handleDelete(post.id)}>削除</button>
               )}

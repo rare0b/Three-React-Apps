@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CreatePost.css";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -14,9 +14,10 @@ const CreatePost = ({ isAuth }) => {
       title: title,
       postText: postText,
       author: {
-        username: auth.currentUser.displayName,
         id: auth.currentUser.uid,
+        photoUrl: auth.currentUser.photoURL,
       },
+      timestamp: serverTimestamp(),
     });
     navigate("/");
   };
