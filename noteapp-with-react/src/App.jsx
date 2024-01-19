@@ -27,6 +27,13 @@ function App() {
     setNotes(filteredNotes);
   };
 
+  const onUpdateNote = (updateNote) => {
+    const updateNotes = notes.map((note) => {
+      return note.id === updateNote.id ? updateNote : note;
+    });
+    setNotes(updateNotes);
+  };
+
   return (
     <div className="App">
       <Sidebar
@@ -36,7 +43,7 @@ function App() {
         activeNoteId={activeNoteId}
         setActiveNoteId={setActiveNoteId}
       />
-      <Main activeNote={getActiveNote()} />
+      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
     </div>
   );
 }
