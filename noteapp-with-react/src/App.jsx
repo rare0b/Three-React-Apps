@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Main from "./components/Main/Main";
 import Sidebar from "./components/Sidebar/Sidebar";
 import uuid from "react-uuid";
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(
+    JSON.parse(localStorage.getItem("notes")) || []
+  );
   const [activeNoteId, setActiveNoteId] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
+  useEffect(() => {
+    notes.length > 0 && setActiveNoteId(notes[0].id);
+  }, []);
 
   const onAddNote = () => {
     const newNote = {
       id: uuid(),
       title: "新しいノート",
-      content: "新しいノートの内容",
+      content: "",
       modDate: Date.now(),
     };
     setNotes([...notes, newNote]);
